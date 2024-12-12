@@ -121,46 +121,41 @@ public class Scrabble {
     // 2. The user gets the Scrabble points of the entered word.
     // 3. The user is prompted to enter another word, or '.' to end the hand. 
 	public static void playHand(String hand) {
-		int n = hand.length();
-		int score = 0;
-		// Declares the variable in to refer to an object of type In, and initializes it to represent
-		// the stream of characters coming from the keyboard. Used for reading the user's inputs.   
+		int totalScore = 0;
 		In in = new In();
+		
 		while (hand.length() > 0) {
 			System.out.println("Current Hand: " + MyString.spacedString(hand));
 			System.out.println("Enter a word, or '.' to finish playing this hand:");
-			// Reads the next "token" from the keyboard. A token is defined as a string of 
-			// non-whitespace characters. Whitespace is either space characters, or  
-			// end-of-line characters.
 			String input = in.readString();
-			//// Replace the following break statement with code
-			//// that completes the hand playing loop
-		if (in.readString() == "."){
-			System.out.println();
-			System.out.println("End of hand. Total score: " + score + " points");
-			break;
-		}
-		if (MyString.subsetOf(input, hand) != true ) {
-			System.out.println("Invalid word. Try again.");
-		}
-		if (isWordInDictionary(input) == true ){
-			if(MyString.subsetOf(input, hand) == true )  {
-				score += wordScore(input) ;
-				hand = MyString.remove(hand, input);
-				System.out.println(input+ " earned " + score +" points. Score: "+ score + " points\n");	
+	
+			if (input.equals(".")) {
+				System.out.println("End of hand. Total score: " + totalScore + " points");
+				break;
+			}
+	
+			if (MyString.subsetOf(input, hand)) 
+			{
+				if (isWordInDictionary(input)) 
+				{
+					int score = wordScore(input);
+					totalScore += score;
+					hand = MyString.remove(hand, input);
+					System.out.println(input + " earned " + score + " points. Score: " + totalScore + " points\n");
+				} 
+				else 
+				{
+					System.out.println("No such word in the dictionary. Try again.");
+				}
+			} 
+			else 
+			{
+				System.out.println("Invalid word. Try again.");
 			}
 		}
-		else{
-			System.out.println("No such word in the dictionary. Try again.");
-		}
-
-		}
-		
-		if (hand.length() == 0) {
-	        System.out.println("Ran out of letters. Total score: " + score + " points");
-		} 
-		else {
-			System.out.println("End of hand. Total score: " + score + " points");
+	
+		if (hand.isEmpty()) {
+			System.out.println("End of hand. Total score: " + totalScore + " points");
 		}
 	}
 
@@ -182,7 +177,7 @@ public class Scrabble {
 			//// that completes the game playing loop
 			if(input.equals("n"))
 			{
-				String hand =createHand();
+				String hand = createHand();
 				playHand(hand);
 			}
 			break;
@@ -195,7 +190,7 @@ public class Scrabble {
 		// testScrabbleScore();    
 		// testCreateHands();  
 		// testPlayHands();
-		// playGame();
+		playGame();
 	}
 
 	public static void testBuildingTheDictionary() {
@@ -220,8 +215,8 @@ public class Scrabble {
 		System.out.println(createHand());
 	}
 	public static void testPlayHands() {
-		init();
-		playHand("ocostrza");
+		// init();
+		// playHand("ocostrza");
 		//playHand("arbffip");
 		//playHand("aretiin");
 	}
