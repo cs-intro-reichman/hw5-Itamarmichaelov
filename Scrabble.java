@@ -121,7 +121,7 @@ public class Scrabble {
     // 2. The user gets the Scrabble points of the entered word.
     // 3. The user is prompted to enter another word, or '.' to end the hand. 
 	public static void playHand(String hand) {
-		int totalScore = 0;
+		int total_score = 0;
 		In in = new In();
 		
 		while (hand.length() > 0) {
@@ -130,7 +130,7 @@ public class Scrabble {
 			String input = in.readString();
 	
 			if (input.equals(".")) {
-				System.out.println("End of hand. Total score: " + totalScore + " points");
+				System.out.println("End of hand. Total score: " + total_score + " points");
 				break;
 			}
 	
@@ -139,9 +139,9 @@ public class Scrabble {
 				if (isWordInDictionary(input)) 
 				{
 					int score = wordScore(input);
-					totalScore += score;
+					total_score += score;
 					hand = MyString.remove(hand, input);
-					System.out.println(input + " earned " + score + " points. Score: " + totalScore + " points\n");
+					System.out.println(input + " earned " + score + " points. Score: " + total_score + " points\n");
 				} 
 				else 
 				{
@@ -155,7 +155,7 @@ public class Scrabble {
 		}
 	
 		if (hand.isEmpty()) {
-			System.out.println("End of hand. Total score: " + totalScore + " points");
+			System.out.println("End of hand. Total score: " + total_score + " points");
 		}
 	}
 
