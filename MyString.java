@@ -21,7 +21,14 @@ public class MyString {
      */
     public static int countChar(String str, char ch) {
         //// Replace the following statement with your code
-        return 0;
+        int counter = 0;
+        
+        for( int i = 0 ; i< str.length();i++ ){
+            if (str.charAt(i) == ch) {
+                counter++;
+            }
+        }
+        return counter;
     }
 
     /** Returns true if str1 is a subset string str2, false otherwise
@@ -37,7 +44,18 @@ public class MyString {
      */
     public static boolean subsetOf(String str1, String str2) {
          //// Replace the following statement with your code
-        return false;
+         if(str1 == null || str1.isEmpty()){
+            return true;
+        }
+
+            for(int i = 0; i < str1.length();i++){
+                int count_1 = countChar(str1, str1.charAt(i));
+                int count_2 = countChar(str2, str1.charAt(i));
+                if (count_1 > count_2) {
+                    return false;
+                }
+            }         
+        return true;
     }
 
     /** Returns a string which is the same as the given string, with a space
@@ -50,7 +68,14 @@ public class MyString {
      */
     public static String spacedString(String str) {
         //// Replace the following statement with your code
-        return null;
+        String spaceString = "" ;
+        for(int i =0 ; i < str.length();i++ ){
+        spaceString += str.substring(i, i+1) ;
+        if ( i < str.length() -1) {
+        spaceString += " ";    
+        }
+        }    
+        return spaceString;
     }
   
     /**
@@ -65,7 +90,11 @@ public class MyString {
      */
     public static String randomStringOfLetters(int n) {
         //// Replace the following statement with your code
-        return null;
+        String string = "";
+        for( int i =0 ; i < n; i++ ){
+        string += (char)(97 + Math.random()*26);
+        }
+        return string;
     }
 
     /**
@@ -79,8 +108,18 @@ public class MyString {
      */
     public static String remove(String str1, String str2) {
        //// Replace the following statement with your code
-        return null;
+    String result = str1; // Start with the original string
+    
+    for (int i = 0; i < str2.length(); i++) {
+        char ch = str2.charAt(i);
+        int index = result.indexOf(ch); // Find the first occurrence of the character
+        if (index != -1) {
+            // Remove the first occurrence of the character
+            result = result.substring(0, index) + result.substring(index + 1);
+        }
     }
+    return result;
+}
 
     /**
      * Returns a string consisting of the given string, with the given 
